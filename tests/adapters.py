@@ -2,10 +2,9 @@ from __future__ import annotations
 
 import os
 from typing import Any
-import pathlib
-import fasttext
 from cs336_data import extract_text
 from cs336_data import filters
+from cs336_data import deduplication
 
 
 def run_extract_text_from_html_bytes(html_bytes: bytes) -> str | None:
@@ -47,7 +46,10 @@ def run_gopher_quality_filter(text: str) -> bool:
 def run_exact_line_deduplication(
     input_files: list[os.PathLike], output_directory: os.PathLike
 ):
-    raise NotImplementedError
+    return deduplication.exact_line_deduplication(
+        input_paths=input_files,
+        output_folder=output_directory,
+    )
 
 
 def run_minhash_deduplication(
@@ -58,4 +60,11 @@ def run_minhash_deduplication(
     jaccard_threshold: float,
     output_directory: os.PathLike,
 ):
-    raise NotImplementedError
+    return deduplication.minhash_deduplication(
+        input_paths=input_files,
+        num_hashes=num_hashes,
+        num_bands=num_bands,
+        ngrams=ngrams,
+        jaccard_threshold=jaccard_threshold,
+        output_dir=output_directory,
+    )
