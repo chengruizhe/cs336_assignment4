@@ -2,43 +2,46 @@ from __future__ import annotations
 
 import os
 from typing import Any
-
+import pathlib
+import fasttext
+from cs336_data import extract_text
+from cs336_data import filters
 
 
 def run_extract_text_from_html_bytes(html_bytes: bytes) -> str | None:
-    raise NotImplementedError
+    return extract_text.extract_html(html_bytes=html_bytes)
 
 
 def run_identify_language(text: str) -> tuple[Any, float]:
-    raise NotImplementedError
+    return filters.identify_language(text)
 
 
 def run_mask_emails(text: str) -> tuple[str, int]:
-    raise NotImplementedError
+    return filters.mask_emails(text)
 
 
 def run_mask_phone_numbers(text: str) -> tuple[str, int]:
-    raise NotImplementedError
+    return filters.mask_phone_numbers(text)
 
 
 def run_mask_ips(text: str) -> tuple[str, int]:
-    raise NotImplementedError
+    return filters.mask_ip(text)
 
 
 def run_classify_nsfw(text: str) -> tuple[Any, float]:
-    raise NotImplementedError
+    return filters.classify_nsfw(text)
 
 
 def run_classify_toxic_speech(text: str) -> tuple[Any, float]:
-    raise NotImplementedError
+    return filters.classify_toxic_speech(text)
 
 
 def run_classify_quality(text: str) -> tuple[Any, float]:
-    raise NotImplementedError
+    return filters.low_quality_filter(text)
 
 
 def run_gopher_quality_filter(text: str) -> bool:
-    raise NotImplementedError
+    return filters.gopher_quality_filter(text)
 
 
 def run_exact_line_deduplication(
